@@ -67,27 +67,11 @@ export default function Chatbot() {
     setInput('');
     setLoading(true);
 
-    const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
-
-    if (!apiKey) {
-      setMessages((m) => [
-        ...m,
-        {
-          role: 'assistant',
-          content:
-            "I'm not connected right now (no API key configured). Try emailing Bipin directly at bipinnamburu2244@gmail.com.",
-        },
-      ]);
-      setLoading(false);
-      return;
-    }
-
     try {
-      const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'gpt-4o-mini',
           messages: [
             { role: 'system', content: SYSTEM_PROMPT },
             ...messages
@@ -95,14 +79,11 @@ export default function Chatbot() {
               .map((m) => ({ role: m.role, content: m.content })),
             { role: 'user', content: userMsg.content },
           ],
-          max_tokens: 300,
-          temperature: 0.6,
         }),
       });
       if (!res.ok) throw new Error(`API ${res.status}`);
       const data = await res.json();
-      const reply =
-        data.choices?.[0]?.message?.content?.trim() ?? "Sorry, I couldn't put that together.";
+      const reply = data.reply;
       setMessages((m) => [...m, { role: 'assistant', content: reply }]);
     } catch {
       setMessages((m) => [
