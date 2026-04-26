@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production';
 // Replace 'portfolio' with your actual repo name if different
-const repoName = 'portfolio';
+const repoName = 'portfolio-bipin';
 
 const nextConfig = {
   ...(isProd && { output: 'export' }),
