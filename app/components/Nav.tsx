@@ -1,42 +1,104 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+
+const links = [
+  { label: 'About', href: '#about' },
+  { label: 'Work', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const spring = { type: 'spring', stiffness: 600, damping: 38 } as const;
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handler = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-paper/80 backdrop-blur-md border-b border-line/60 py-4'
-          : 'py-6'
+          ? 'bg-surface/90 backdrop-blur-md border-b border-border py-3.5 shadow-card'
+          : 'py-5'
       }`}
-      style={{ backgroundColor: scrolled ? 'rgba(245,241,232,0.8)' : 'transparent' }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-        <a href="#top" className="font-serif text-xl tracking-tight">
-          <span className="italic">B.</span>Namburu
-        </a>
-        <ul className="hidden md:flex items-center gap-10 text-sm tracking-wide uppercase">
-          <li><a href="#about" className="editorial-link">About</a></li>
-          <li><a href="#experience" className="editorial-link">Work</a></li>
-          <li><a href="#skills" className="editorial-link">Craft</a></li>
-          <li><a href="#contact" className="editorial-link">Contact</a></li>
-        </ul>
+      <div className="max-w-content mx-auto px-6 md:px-12 flex items-center justify-between">
         <a
-          href="#contact"
-          className="hidden md:inline-block text-sm uppercase tracking-wider border border-ink px-5 py-2 hover:bg-ink hover:text-paper transition-colors duration-300"
+          href="#top"
+          className="font-serif text-xl font-bold text-t1 hover:text-t2 transition-colors"
         >
-          Say Hello
+          BN.
         </a>
+
+        <nav className="hidden md:flex items-center gap-0.5" aria-label="Primary navigation">
+          {links.map(({ label, href }) => (
+            <a
+              key={label}
+              href={href}
+              className="px-3.5 py-1.5 text-sm text-t2 hover:text-t1 rounded-md hover:bg-surface-2 transition-all duration-150"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          {/* Theme toggle */}
+          <motion.button
+            onClick={toggle}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.88 }}
+            transition={spring}
+            aria-label="Toggle theme"
+            className="w-8 h-8 rounded-full border border-border bg-surface-2 flex items-center justify-center text-t2 hover:text-t1 hover:border-border-strong transition-colors"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {theme === 'dark' ? (
+                <motion.div
+                  key="sun"
+                  initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+                  animate={{ rotate: 0,   opacity: 1, scale: 1 }}
+                  exit={{    rotate:  90, opacity: 0, scale: 0.6 }}
+                  transition={spring}
+                >
+                  <Sun size={14} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="moon"
+                  initial={{ rotate: 90,  opacity: 0, scale: 0.6 }}
+                  animate={{ rotate: 0,   opacity: 1, scale: 1 }}
+                  exit={{    rotate: -90, opacity: 0, scale: 0.6 }}
+                  transition={spring}
+                >
+                  <Moon size={14} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
+
+          <span className="hidden md:inline-flex items-center gap-1.5 text-xs font-mono text-green">
+            <span className="w-1.5 h-1.5 rounded-full bg-green" />
+            Available
+          </span>
+          <a
+            href="mailto:bipinnamburu2244@gmail.com"
+            className="hidden md:block px-4 py-2 text-sm font-medium bg-t1 text-bg rounded-full hover:opacity-80 transition-opacity"
+          >
+            Find me here
+          </a>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }

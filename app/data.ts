@@ -8,7 +8,7 @@ export const profile = {
   github: 'https://github.com/BipinNamburu',
   linkedin: 'https://www.linkedin.com/in/bipinnamburu/',
   intro:
-    'Five years building products end-to-end — from React interfaces that load fast and feel right, to Node and Python services that quietly do the heavy lifting. Currently shipping a GenAI insights platform at AB InBev.',
+    'AI engineer with five years of full-stack depth, building LLM-powered products from prompt design and inference pipelines to the interfaces that make them useful. Currently shipping a GenAI insights platform at AB InBev.',
 };
 
 export type Experience = {
@@ -16,11 +16,13 @@ export type Experience = {
   role: string;
   location: string;
   period: string;
-  logo: string; // Logo.dev or Clearbit URL
+  logo?: string; // Logo.dev or Clearbit URL
   projects: {
     name: string;
     stack: string[];
     bullets: string[];
+    url?: string;
+    screenshot?: string;
   }[];
 };
 
@@ -29,15 +31,15 @@ export const experiences: Experience[] = [
     company: 'AB InBev',
     role: 'Full Stack Developer',
     location: 'Bengaluru',
-    period: 'Aug 2025 — Present',
-    logo: 'https://logo.clearbit.com/ab-inbev.com',
+    period: 'Aug 2025  Present',
+    // logo: 'https://logo.clearbit.com/ab-inbev.com',
     projects: [
       {
-        name: 'GenAI Insights Chat Platform',
+        name: 'Insights Copilot - insights generation Application using GenAI',
         stack: ['React', 'TypeScript', 'Node.js', 'Python', 'FastAPI', 'LLM APIs'],
         bullets: [
           'Part of a cross-functional team delivering a GenAI-powered chat application providing real-time business insights across company-wide operations.',
-          'Developed Node.js backend services to integrate LLM APIs, manage streaming responses, and expose REST endpoints consumed by the React frontend.',
+          'Developed python backend services to integrate LLM APIs, manage streaming responses, and expose REST endpoints consumed by the React frontend.',
           'Built FastAPI microservices in Python to handle AI inference requests, data processing pipelines, and serve structured business insights to the frontend.',
           'Wrote Python data processing scripts to transform and surface operational metrics through the AI chat layer.',
           'Built the conversational React UI enabling employees to query internal company data through natural language with real-time streaming feedback.',
@@ -50,12 +52,14 @@ export const experiences: Experience[] = [
     company: 'ZopSmart',
     role: 'Software Development Engineer 2',
     location: 'Bengaluru',
-    period: 'Aug 2024 — Jul 2025',
-    logo: 'https://logo.clearbit.com/zopsmart.com',
+    period: 'Aug 2024  Jul 2025',
+    // logo: 'https://logo.clearbit.com/zopsmart.com',
     projects: [
       {
         name: 'EazyUpdates',
         stack: ['React', 'TypeScript', 'Node.js', 'Redux', 'React Query'],
+        url: 'https://eazyupdates.com/',
+        screenshot: '/eazyupdtaes.png',
         bullets: [
           'Migrated the entire frontend codebase to TypeScript, reducing critical bugs by 25% as measured with SonarQube.',
           'Built and maintained Node.js backend services for real-time content updates, notification delivery, and user preference management.',
@@ -67,10 +71,13 @@ export const experiences: Experience[] = [
       {
         name: 'Zopping',
         stack: ['ReactJS', 'NextJS', 'Node.js'],
+        url: 'https://zopping.com/themes',
+        screenshot: '/zopping.png',
         bullets: [
           'Reduced bundle size by 37% via tree shaking and lazy loading, cutting initial load time by 2 seconds.',
           'Implemented Next.js SSR alongside Node.js API optimisations, boosting SEO and organic traffic by 20% over a quarter.',
           'Contributed to backend route handlers for product catalogue and search endpoints.',
+          'Built and maintained the merchant themes marketplace, enabling store owners to browse, preview, and apply custom storefronts with zero downtime.',
         ],
       },
     ],
@@ -79,12 +86,14 @@ export const experiences: Experience[] = [
     company: 'NowFloats',
     role: 'Software Developer',
     location: 'Hyderabad',
-    period: 'Apr 2023 — Jul 2024',
-    logo: 'https://logo.clearbit.com/nowfloats.com',
+    period: 'Apr 2023  Jul 2024',
+    // logo: 'https://logo.clearbit.com/nowfloats.com',
     projects: [
       {
         name: 'Boost 360',
         stack: ['ReactJS', 'NextJS', 'TypeScript'],
+        url: 'https://www.getboost360.com/',
+        screenshot: '/boost.png',
         bullets: [
           'Rebuilt the product website, improving load times by 40% and enhancing SEO rankings.',
           'Developed 10+ reusable React components with modular CSS for consistent, maintainable UI.',
@@ -105,8 +114,8 @@ export const experiences: Experience[] = [
     company: 'Infosys',
     role: 'Digital Specialist Engineer',
     location: 'Hyderabad',
-    period: 'Aug 2021 — Mar 2023',
-    logo: 'https://logo.clearbit.com/infosys.com',
+    period: 'Aug 2021  Mar 2023',
+    // logo: 'https://logo.clearbit.com/infosys.com',
     projects: [
       {
         name: 'BNSF Railways Application',
@@ -126,7 +135,7 @@ export type SkillCategory = {
   items: { name: string; icon: string }[];
 };
 
-// Using simpleicons CDN — free, no key, every major tech logo
+// Using simpleicons CDN  free, no key, every major tech logo
 const si = (slug: string) =>
   `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${slug}.svg`;
 
@@ -146,6 +155,9 @@ export const skills: SkillCategory[] = [
       { name: 'CSS3', icon: si('css3') },
       { name: 'Jest', icon: si('jest') },
       { name: 'Storybook', icon: si('storybook') },
+      { name: 'Figma', icon: si('figma') },
+      { name: 'TanStack', icon: si('reactquery') },
+      { name: 'React Native', icon: si('react') },
     ],
   },
   {
@@ -156,6 +168,9 @@ export const skills: SkillCategory[] = [
       { name: 'Express', icon: si('express') },
       { name: 'FastAPI', icon: si('fastapi') },
       { name: 'GraphQL', icon: si('graphql') },
+      { name: 'Redis', icon: si('redis') },
+      { name: 'PostgreSQL', icon: si('postgresql') },
+      { name: 'SQLite', icon: si('sqlite') },
     ],
   },
   {
@@ -167,6 +182,7 @@ export const skills: SkillCategory[] = [
       { name: 'Git', icon: si('git') },
       { name: 'Webpack', icon: si('webpack') },
       { name: 'Grafana', icon: si('grafana') },
+      { name: 'Mixpanel', icon: si('mixpanel') },
     ],
   },
 ];

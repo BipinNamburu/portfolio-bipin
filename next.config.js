@@ -4,7 +4,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const repoName = 'portfolio';
 
 const nextConfig = {
-  output: 'export',
+  ...(isProd && { output: 'export' }),
   images: { unoptimized: true },
   basePath: isProd ? `/${repoName}` : '',
   assetPrefix: isProd ? `/${repoName}/` : '',

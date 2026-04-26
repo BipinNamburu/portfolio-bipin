@@ -1,4 +1,4 @@
-# Bipin Namburu — Portfolio
+# Bipin Namburu  Portfolio
 
 An editorial-style Next.js 14 portfolio with TypeScript, Tailwind, Framer Motion, and a built-in AI assistant. Statically exported for GitHub Pages.
 
@@ -61,26 +61,26 @@ The exact URL appears in the workflow's "deploy" job output under "Deploy to Git
 
 ## ⚠️ Important security note about the chatbot
 
-GitHub Pages serves static files only — there's no server. That means **the OpenAI API key gets bundled into the client JavaScript and is visible to anyone who opens DevTools**. There is no way around this on a purely static host.
+GitHub Pages serves static files only  there's no server. That means **the OpenAI API key gets bundled into the client JavaScript and is visible to anyone who opens DevTools**. There is no way around this on a purely static host.
 
 You have three options:
 
-### Option A — Accept the exposure with strict limits (easiest)
+### Option A  Accept the exposure with strict limits (easiest)
 On the OpenAI dashboard:
 - Set a **monthly spend limit** (Settings → Limits → "Set monthly budget", e.g. $5)
 - Create a **project-scoped key** with rate limits
 - Restrict the key to `gpt-4o-mini` only
 - Monitor usage; rotate the key if abuse appears
 
-### Option B — Move the bot to a serverless function (recommended)
-Deploy to **Vercel** or **Netlify** instead — both are free, both run Next.js out of the box, and both let you keep the key server-side. The included `app/api/chat/route.ts` pattern (which you'd add) keeps the key in `OPENAI_API_KEY` (no `NEXT_PUBLIC_` prefix). This is genuinely secure.
+### Option B  Move the bot to a serverless function (recommended)
+Deploy to **Vercel** or **Netlify** instead  both are free, both run Next.js out of the box, and both let you keep the key server-side. The included `app/api/chat/route.ts` pattern (which you'd add) keeps the key in `OPENAI_API_KEY` (no `NEXT_PUBLIC_` prefix). This is genuinely secure.
 
-### Option C — Disable the bot
+### Option C  Disable the bot
 Remove `<Chatbot />` from `app/page.tsx`. Everything else still works.
 
 ## Customising
 
-- **Resume content**: `app/data.ts` — every experience, project, skill, and stat
+- **Resume content**: `app/data.ts`  every experience, project, skill, and stat
 - **Colors**: `tailwind.config.js` and CSS variables in `app/globals.css`
 - **Fonts**: `app/layout.tsx` (swap the Google Font imports)
 - **Bot behaviour**: edit the `SYSTEM_PROMPT` in `app/components/Chatbot.tsx`

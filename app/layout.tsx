@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from './context/ThemeContext';
 
 const fraunces = Fraunces({
   subsets: ['latin'],
@@ -22,7 +23,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Bipin Namburu — Full Stack Developer',
+  title: 'Bipin Namburu  Full Stack Developer',
   description:
     'Full Stack Developer with 5 years of experience crafting performant, elegant web experiences with React, Next.js, Node.js, and Python. Currently at AB InBev.',
   keywords: [
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Bipin Namburu' }],
   openGraph: {
-    title: 'Bipin Namburu — Full Stack Developer',
+    title: 'Bipin Namburu  Full Stack Developer',
     description:
       'Full Stack Developer crafting performant, elegant web experiences.',
     type: 'website',
@@ -45,12 +46,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bipin Namburu — Full Stack Developer',
+    title: 'Bipin Namburu  Full Stack Developer',
     description:
       'Full Stack Developer crafting performant, elegant web experiences.',
   },
   robots: { index: true, follow: true },
 };
+
+// Runs before React hydrates — prevents flash of wrong theme
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -60,11 +64,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable}`}
     >
       <body>
-        <div className="grain" aria-hidden="true" />
-        {children}
+        {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
