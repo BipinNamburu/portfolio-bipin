@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
+import { asset } from '../lib/asset';
 import { SectionLabel } from './ui/SectionLabel';
 import { Tag } from './ui/Tag';
 import { experiences } from '../data';
@@ -130,7 +131,7 @@ function ExperienceRow({
                       </div>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={p.screenshot}
+                        src={asset(p.screenshot)}
                         alt={`${p.name} screenshot`}
                         className="w-full h-32 object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
                         loading="lazy"

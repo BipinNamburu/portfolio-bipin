@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { SectionLabel } from './ui/SectionLabel';
+import { asset } from '../lib/asset';
 
 const ease = [0.21, 0.47, 0.32, 0.98] as const;
 
@@ -40,11 +40,11 @@ export default function About() {
                 className="flex gap-5 items-start border border-border rounded-xl p-5 hover:bg-surface hover:border-border-strong transition-all duration-200 group"
               >
                 <div className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-border">
-                  <Image
-                    src="/recognition.png"
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={asset('/recognition.png')}
                     alt="Cicerone Award"
-                    fill
-                    className="object-cover"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
                 <div className="flex-1 min-w-0">

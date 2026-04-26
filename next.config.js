@@ -10,6 +10,9 @@ const nextConfig = {
   assetPrefix: isProd ? `/${repoName}/` : '',
   trailingSlash: true,
   reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? `/${repoName}` : '',
+  },
 };
 
 module.exports = nextConfig;

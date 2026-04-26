@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown } from 'lucide-react';
-import Image from 'next/image';
 import { profile } from '../data';
+import { asset } from '../lib/asset';
 
 const ease = [0.21, 0.47, 0.32, 0.98] as const;
 
@@ -124,12 +124,11 @@ export default function Hero() {
 
             {/* Center photo */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-hidden border-2 border-border shadow-card-md z-10">
-                <Image
-                  src="/image.png"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={asset('/image.png')}
                   alt="Bipin Namburu"
-                  fill
-                  className="object-cover"
-                  priority
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
             </div>
           </motion.div>
